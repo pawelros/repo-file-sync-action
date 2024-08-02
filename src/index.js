@@ -114,6 +114,8 @@ async function run() {
 				}
 			})
 
+			core.setOutput('modified_files', modified.map((file) => file.dest))
+
 			if (DRY_RUN) {
 				core.warning('Dry run, no changes will be pushed')
 
