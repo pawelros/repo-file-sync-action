@@ -116,7 +116,7 @@ async function run() {
 
 			modified_files = modified.map((file) => file.dest)
 			core.setOutput('modified_files', modified_files)
-			core.info('WOLOLO')
+			core.info('WOLOLO!')
 			core.info(modified_files)
 			core.debug('Modified files: ' + modified_files)
 
