@@ -114,11 +114,11 @@ async function run() {
 				}
 			})
 
-			modified_files = modified.map((file) => file.dest)
-			core.setOutput('modified_files', modified_files)
+			let modifiedFiles = modified.map((file) => file.dest)
+			core.setOutput('modified_files', modifiedFiles)
 			core.info('WOLOLO!')
-			core.info(modified_files)
-			core.debug('Modified files: ' + modified_files)
+			core.info(modifiedFiles)
+			core.debug('Modified files: ' + modifiedFiles)
 
 			if (DRY_RUN) {
 				core.warning('Dry run, no changes will be pushed')
