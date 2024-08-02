@@ -114,7 +114,7 @@ async function run() {
 				}
 			})
 
-			let modifiedFiles = modified.map((file) => file.dest)
+			const modifiedFiles = modified.map((file) => file.dest)
 			core.setOutput('modified_files', modifiedFiles)
 			core.info('WOLOLO!')
 			core.info(modifiedFiles)
