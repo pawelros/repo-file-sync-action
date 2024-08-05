@@ -31,6 +31,7 @@ async function run() {
 
 	const prUrls = []
 
+	const modifiedFiles = []
 	await forEach(repos, async (item) => {
 		core.info(`Repository Info`)
 		core.info(`Slug		: ${ item.repo.name }`)
@@ -106,20 +107,15 @@ async function run() {
 					await git.commit(message[destExists].commit)
 					modified.push({
 						dest: file.dest,
-						localDestination: dest,
 						source: file.source,
 						message: message[destExists].pr,
 						useOriginalMessage: useOriginalCommitMessage,
 						commitMessage: message[destExists].commit
 					})
+
+					modifiedFiles.push(dest)
 				}
 			})
-
-			const modifiedFiles = modified.map((file) => file.localDestination)
-			core.setOutput('modified_files', modifiedFiles)
-			core.info('WOLOLO!')
-			core.info(modifiedFiles)
-			core.debug('Modified files: ' + modifiedFiles)
 
 			if (DRY_RUN) {
 				core.warning('Dry run, no changes will be pushed')
@@ -207,7 +203,13 @@ async function run() {
 			core.setFailed(err.message)
 			core.debug(err)
 		}
+
 	})
+
+	core.setOutput('modified_files', modifiedFiles)
+	core.info('WOLOLO!')
+	core.info(modifiedFiles)
+	core.debug('Modified files: ' + modifiedFiles)
 
 	// If we created any PRs, set their URLs as the output
 	if (prUrls) {
