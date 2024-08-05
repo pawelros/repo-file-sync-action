@@ -106,6 +106,7 @@ async function run() {
 					await git.commit(message[destExists].commit)
 					modified.push({
 						dest: file.dest,
+						localDestination: dest,
 						source: file.source,
 						message: message[destExists].pr,
 						useOriginalMessage: useOriginalCommitMessage,
@@ -114,7 +115,7 @@ async function run() {
 				}
 			})
 
-			const modifiedFiles = modified.map((file) => file.dest)
+			const modifiedFiles = modified.map((file) => file.localDestination)
 			core.setOutput('modified_files', modifiedFiles)
 			core.info('WOLOLO!')
 			core.info(modifiedFiles)
